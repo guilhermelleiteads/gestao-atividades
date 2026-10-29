@@ -6,53 +6,53 @@ Este documento relaciona os conceitos de [11 conceitos.md](11%20conceitos.md) co
 
 **Status: Atende.** JSX descreve a interface usando uma sintaxe semelhante a HTML.
 
-- [src/main.tsx](src/main.tsx): o JSX passado para `ReactDOM.createRoot(...).render(...)` monta a aplicação.
-- [src/App.tsx](src/App.tsx): retorna os elementos da tela de login ou da aplicação autenticada.
-- [src/components/ActivityCard.tsx](src/components/ActivityCard.tsx) e [src/components/Navbar.tsx](src/components/Navbar.tsx): descrevem partes da interface em JSX.
+- [src/main.jsx](src/main.jsx): o JSX passado para `ReactDOM.createRoot(...).render(...)` monta a aplicação.
+- [src/App.jsx](src/App.jsx): retorna os elementos da tela de login ou da aplicação autenticada.
+- [src/components/ActivityCard.jsx](src/components/ActivityCard.jsx) e [src/components/Navbar.jsx](src/components/Navbar.jsx): descrevem partes da interface em JSX.
 
 ## 2. Componentes
 
 **Status: Atende.** A interface está dividida em componentes.
 
-- [src/App.tsx](src/App.tsx): componente principal `App`.
-- [src/components/ActivityCard.tsx](src/components/ActivityCard.tsx): componente reutilizável de atividade.
-- [src/components/Navbar.tsx](src/components/Navbar.tsx): componente de navegação.
+- [src/App.jsx](src/App.jsx): componente principal `App`.
+- [src/components/ActivityCard.jsx](src/components/ActivityCard.jsx): componente reutilizável de atividade.
+- [src/components/Navbar.jsx](src/components/Navbar.jsx): componente de navegação.
 
 ## 3. Props
 
 **Status: Atende.** O componente pai envia dados e funções para os componentes filhos.
 
-- [src/App.tsx](src/App.tsx): fornece `currentUser`, `activeTab` e funções de navegação a `Navbar`; fornece atividade, usuário e callbacks a cada `ActivityCard`.
-- [src/components/Navbar.tsx](src/components/Navbar.tsx): recebe `currentUser`, `onLogout`, `activeTab` e `setActiveTab`.
-- [src/components/ActivityCard.tsx](src/components/ActivityCard.tsx): recebe `activity`, `users`, `currentUserId` e callbacks de ação.
+- [src/App.jsx](src/App.jsx): fornece `currentUser`, `activeTab` e funções de navegação a `Navbar`; fornece atividade, usuário e callbacks a cada `ActivityCard`.
+- [src/components/Navbar.jsx](src/components/Navbar.jsx): recebe `currentUser`, `onLogout`, `activeTab` e `setActiveTab`.
+- [src/components/ActivityCard.jsx](src/components/ActivityCard.jsx): recebe `activity`, `users`, `currentUserId` e callbacks de ação.
 
 ## 4. Virtual DOM
 
 **Status: Atende.** A aplicação é montada pelo React e as mudanças de estado atualizam a interface por meio do mecanismo de renderização e reconciliação do React.
 
-- [src/main.tsx](src/main.tsx): cria a raiz com `createRoot` e renderiza `<App />`.
-- [src/App.tsx](src/App.tsx): alterações feitas com `useState` causam nova renderização da interface.
+- [src/main.jsx](src/main.jsx): cria a raiz com `createRoot` e renderiza `<App />`.
+- [src/App.jsx](src/App.jsx): alterações feitas com `useState` causam nova renderização da interface.
 
 ## 5. Listas e keys
 
 **Status: Atende.** Coleções são transformadas em elementos com `map()` e os itens recebem `key`.
 
-- [src/App.tsx](src/App.tsx): listas de usuários, opções e atividades usam `map()`; as atividades usam `key={activity.id}` e as opções usam `key={u.id}`.
+- [src/App.jsx](src/App.jsx): listas de usuários, opções e atividades usam `map()`; as atividades usam `key={activity.id}` e as opções usam `key={u.id}`.
 - O painel gerencial também percorre colaboradores e atividades, identificando os elementos por seus IDs.
 
 ## 6. Renderização condicional
 
 **Status: Atende.** O conteúdo exibido depende de estados e condições.
 
-- [src/App.tsx](src/App.tsx): mostra login quando `currentUser` não existe; alterna abas; exibe estado vazio ou lista conforme o resultado; abre o modal conforme `isModalOpen`.
-- [src/components/ActivityCard.tsx](src/components/ActivityCard.tsx): mostra controles de compartilhamento conforme o convite e ações de edição/exclusão conforme a propriedade da atividade.
-- [src/components/Navbar.tsx](src/components/Navbar.tsx): mostra o painel gerencial somente para usuários com perfil `manager`.
+- [src/App.jsx](src/App.jsx): mostra login quando `currentUser` não existe; alterna abas; exibe estado vazio ou lista conforme o resultado; abre o modal conforme `isModalOpen`.
+- [src/components/ActivityCard.jsx](src/components/ActivityCard.jsx): mostra controles de compartilhamento conforme o convite e ações de edição/exclusão conforme a propriedade da atividade.
+- [src/components/Navbar.jsx](src/components/Navbar.jsx): mostra o painel gerencial somente para usuários com perfil `manager`.
 
 ## 7. State e useState
 
 **Status: Atende.** `useState` guarda informações necessárias à interação e à atualização da tela.
 
-- [src/App.tsx](src/App.tsx): estados de usuários, usuário atual, atividades, aba, filtros, modal e dados dos formulários.
+- [src/App.jsx](src/App.jsx): estados de usuários, usuário atual, atividades, aba, filtros, modal e dados dos formulários.
 - As ações de criar, editar, excluir e alterar status atualizam o estado de atividades.
 
 **Limite atual:** os dados são mantidos apenas em memória. Ao recarregar a página, as alterações feitas durante a sessão não são persistidas.
@@ -61,8 +61,8 @@ Este documento relaciona os conceitos de [11 conceitos.md](11%20conceitos.md) co
 
 **Status: Atende.** A plataforma recebe e processa dados em formulários.
 
-- [src/App.tsx](src/App.tsx): formulário de login usa `onSubmit={handleLogin}`.
-- [src/App.tsx](src/App.tsx): formulário de atividade usa `onSubmit={handleSaveActivity}` e campos controlados por `formData` e `setFormData`.
+- [src/App.jsx](src/App.jsx): formulário de login usa `onSubmit={handleLogin}`.
+- [src/App.jsx](src/App.jsx): formulário de atividade usa `onSubmit={handleSaveActivity}` e campos controlados por `formData` e `setFormData`.
 - `handleSaveActivity` valida título e data de entrega antes de criar ou atualizar uma atividade.
 
 ## 9. useEffect
@@ -81,8 +81,8 @@ As alterações feitas na interface atualizam somente o estado local do React; n
 
 **Status: Não implementado.** Não há configuração de React Router nem rotas associadas a URLs.
 
-- [src/App.tsx](src/App.tsx) guarda a aba ativa no estado `activeTab`.
-- [src/components/Navbar.tsx](src/components/Navbar.tsx) muda essa aba usando botões e `setActiveTab`.
+- [src/App.jsx](src/App.jsx) guarda a aba ativa no estado `activeTab`.
+- [src/components/Navbar.jsx](src/components/Navbar.jsx) muda essa aba usando botões e `setActiveTab`.
 
 Essa navegação troca o conteúdo dentro da mesma página, mas não cria URLs ou histórico de navegação para páginas diferentes.
 

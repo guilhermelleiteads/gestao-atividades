@@ -1,6 +1,6 @@
 # TaskFlow - Gestao de Atividades
 
-Aplicacao React com Vite, TypeScript e Tailwind CSS.
+Aplicacao React com Vite, JSX e Tailwind CSS. Os arquivos de configuracao permanecem em TypeScript.
 
 ## Estrutura
 
@@ -8,9 +8,9 @@ Aplicacao React com Vite, TypeScript e Tailwind CSS.
 src/
   components/   Componentes reutilizaveis da interface
   data/         Dados de exemplo
-  App.tsx       Estado e telas principais
+  App.jsx       Estado e telas principais
   index.css     Estilos globais e Tailwind
-  main.tsx      Ponto de entrada React
+  main.jsx      Ponto de entrada React
 ```
 
 ## Comandos
