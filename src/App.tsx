@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+// App compõe a interface a partir de componentes reutilizáveis.
 import { ActivityCard } from './components/ActivityCard';
 import { Navbar } from './components/Navbar';
 import { INITIAL_ACTIVITIES, INITIAL_USERS } from './data/mockData';
@@ -7,6 +8,7 @@ import { INITIAL_ACTIVITIES, INITIAL_USERS } from './data/mockData';
 // MAIN APP COMPONENT
 // ==========================================
 export default function App() {
+  // Estado do React (useState): ao atualizar esses valores, o React renderiza novamente a interface.
   const [users, setUsers] = useState(INITIAL_USERS);
   const [currentUser, setCurrentUser] = useState(null);
   const [activities, setActivities] = useState(INITIAL_ACTIVITIES);
@@ -34,7 +36,7 @@ export default function App() {
   // Login form state
   const [loginEmail, setLoginEmail] = useState('carlos@empresa.com');
 
-  // Handle Login
+  // Formulário de login: previne o envio padrão, valida o usuário e atualiza o estado.
   const handleLogin = (e) => {
     e.preventDefault();
     const found = users.find(u => u.email === loginEmail);
@@ -46,7 +48,7 @@ export default function App() {
     }
   };
 
-  // Activity Submission (Create / Update)
+  // Formulário de atividade: valida os campos e cria ou atualiza dados no estado local.
   const handleSaveActivity = (e) => {
     e.preventDefault();
     if (!formData.title || !formData.dueDate) {
@@ -147,9 +149,7 @@ export default function App() {
     }));
   };
 
-  // ==========================================
-  // RENDER LOGIN SCREEN IF NOT AUTHENTICATED
-  // ==========================================
+  // Renderização condicional: exibe o login enquanto não houver usuário autenticado.
   if (!currentUser) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
@@ -172,6 +172,7 @@ export default function App() {
                 onChange={(e) => setLoginEmail(e.target.value)}
                 className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl p-3 text-slate-800 dark:text-slate-100 font-medium focus:ring-2 focus:ring-indigo-500"
               >
+                {/* Lista de usuários: map gera uma opção por usuário e key identifica cada item. */}
                 {users.map(u => (
                   <option key={u.id} value={u.email}>
                     {u.name} ({u.role === 'manager' ? 'Gerente 📊' : 'Colaborador 👤'})
@@ -196,9 +197,7 @@ export default function App() {
     );
   }
 
-  // ==========================================
-  // FILTERING LOGIC
-  // ==========================================
+  // Dados derivados do estado: filtragem e ordenação são recalculadas durante a renderização.
   const myActivities = activities.filter(act => {
     const isAssignedToMe = act.assignedTo === currentUser.id;
     const isSharedWithMeAccepted = act.sharedWith?.some(s => s.userId === currentUser.id && s.status === 'accepted');
@@ -231,7 +230,7 @@ export default function App() {
       {/* Main Container */}
       <main className="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
         
-        {/* TAB 1: ACTIVITIES VIEW */}
+        {/* JSX e renderização condicional: cada aba apresenta uma parte da interface conforme activeTab. */}
         {activeTab === 'activities' && (
           <div className="space-y-6">
             
@@ -295,6 +294,7 @@ export default function App() {
             </div>
 
             {/* Activities List / Grid */}
+            {/* Condicional ternária alterna entre estado vazio e lista de atividades. */}
             {filteredActivities.length === 0 ? (
               <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
                 <p className="text-4xl mb-3">📭</p>
@@ -303,6 +303,7 @@ export default function App() {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Lista de componentes: cada atividade vira um ActivityCard com key estável. */}
                 {filteredActivities.map(activity => (
                   <ActivityCard
                     key={activity.id}
@@ -425,7 +426,8 @@ export default function App() {
 
       </main>
 
-      {/* MODAL FOR CREATE / EDIT ACTIVITY */}
+      {/* Formulário controlado: value/onChange sincronizam os campos com formData em useState. */}
+      {/* Renderização condicional: o modal existe no JSX apenas quando isModalOpen é true. */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-slate-200 dark:border-slate-800">

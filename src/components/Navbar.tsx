@@ -1,3 +1,4 @@
+// Componente de navegação reutilizável; recebe usuário, aba ativa e callbacks por props.
 export function Navbar({ currentUser, onLogout, activeTab, setActiveTab }) {
   return (
     <header className="bg-slate-900 text-white shadow-md sticky top-0 z-50">
@@ -28,6 +29,7 @@ export function Navbar({ currentUser, onLogout, activeTab, setActiveTab }) {
             🤝 Compartilhamentos
           </button>
 
+          {/* Renderização condicional por perfil: o painel só aparece para gerentes. */}
           {currentUser.role === 'manager' && (
             <button
               onClick={() => setActiveTab('manager')}

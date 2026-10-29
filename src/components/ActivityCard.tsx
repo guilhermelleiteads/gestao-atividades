@@ -1,3 +1,4 @@
+// Componente reutilizável; recebe os dados e ações do componente pai por props.
 export function ActivityCard({ activity, currentUserId, users, onUpdateStatus, onShare, onDelete, onEdit }) {
   const isOwner = activity.assignedTo === currentUserId;
   const assignedUser = users.find((user) => user.id === activity.assignedTo);
@@ -31,6 +32,7 @@ export function ActivityCard({ activity, currentUserId, users, onUpdateStatus, o
         </div>
       </div>
 
+      {/* Renderização condicional: os controles de compartilhamento só aparecem se houver convite. */}
       {myShare && (
         <div className={`p-2.5 rounded-xl text-xs flex justify-between items-center ${
           myShare.status === 'pending' ? 'bg-amber-50 text-amber-800 border border-amber-200' :
@@ -62,6 +64,7 @@ export function ActivityCard({ activity, currentUserId, users, onUpdateStatus, o
         </select>
 
         <div className="flex items-center gap-1.5">
+          {/* Permissões alteram o que é renderizado: somente o responsável pode editar ou excluir. */}
           {isOwner && (
             <button
               onClick={() => onEdit(activity)}
